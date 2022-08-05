@@ -20,9 +20,8 @@ export default function App(){
   const [isLoading, setLoading] = useState(false);
 
   return (
-    <SafeAreaView style={styles.container}>
-
-    
+    <ScrollView>
+    <SafeAreaView style={styles.container}> 
     <View>
       <Text>Entre com o CEP para pesquisar: 00000-000</Text>
       <TextInput 
@@ -35,6 +34,7 @@ export default function App(){
         />
       
       <Button 
+        style = {styles.botao}
         title="Consumindo ViaCEP API"
         color="#841584"
         accessibilityLabel="Aprenda mais
@@ -42,33 +42,39 @@ export default function App(){
       />
 
       <TextInput
+        style = {styles.inputLarge}
         onChangeText={alterarLogradouro}
         value={logradouro}
         keyboardType="default"
         accessibilityHint="Logradouro"
         hintText={"Logradouro"}
         multiline={true}
+        numberOfLines={3}
       />
 
       <TextInput
+        style = {styles.input}
         onChangeText={alterarComplemento}
         value={complemento}
         keyboardType="default"
       />
 
       <TextInput
+      style = {styles.input}
         onChangeText={alterarBairro}
         value={bairro}
         keyboardType="default"
       />
 
       <TextInput
+      style = {styles.input}
         onChangeText={alterarLocalidade}
         value={localidade}
         keyboardType="default"
       />
 
       <TextInput
+      style = {styles.input}
         onChangeText={alterarUf}
         value={uf}
         keyboardType="default"
@@ -76,24 +82,28 @@ export default function App(){
       />
 
       <TextInput
+      style = {styles.input}
         onChangeText={alterarIbge}
         value={ibge}
         keyboardType="numeric"
       />
 
       <TextInput
+      style = {styles.input}
         onChangeText={alterarGia}
         value={gia}
         keyboardType="numeric"
       />
 
       <TextInput
+      style = {styles.input}
         onChangeText={alterarDDD}
         value={ddd}
         keyboardType="numeric"
       />
 
       <TextInput
+      style = {styles.input}
         onChangeText={alterarSiafi}
         value={siafi}
         keyboardType="numeric"
@@ -101,6 +111,7 @@ export default function App(){
 
     </View>
     </SafeAreaView>
+    </ScrollView>
   )
  
 }
@@ -119,6 +130,32 @@ const styles = StyleSheet.create({
     alignSelf: 'center', 
     textAlign: 'center',
   }, 
-  
-
+  input: {
+    height: 40,
+    margin: 16,
+    borderWidth: 1,
+    padding: 8,
+    minWidth: 150,
+    maxWidth: 256,
+    borderRadius: 32,
+  },
+  inputLarge: {
+    height: 40,
+    minHeight: 80,
+    margin: 16,
+    borderWidth: 1,
+    padding: 8,
+    width: "100%",
+    maxWidth: 256,
+    minWidth: 150,
+    borderRadius: 32,
+  },
+  botao: {
+    height: 40,
+    margin: 16,
+    borderWidth: 1,
+    padding: 4,
+    width: 50,
+    borderRadius: 32,
+  },
 })
