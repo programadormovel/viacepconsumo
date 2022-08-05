@@ -19,13 +19,40 @@ export default function App(){
 
   const [isLoading, setLoading] = useState(false);
 
+  // Componente Assíncrono
+  const buscarEndereco = async () => {
+    try {
+      const response = await fetch('https://viacep.com.br/ws/' + 
+          cep.toString().replace("-","") + '/json/');
+      const json = await response.json();
+      alterarLogradouro(json.logradouro);
+      alterarComplemento(json.complemento);
+      alterarBairro(json.bairro);
+      alterarLocalidade(json.localidade);
+      alterarUf(json.uf);
+      alterarIbge(json.ibge);
+      alterarGia(json.gia);
+      alterarDDD(json.ddd);
+      alterarSiafi(json.siafi);
+
+    } catch (error){
+      Alert.alert(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    buscarEndereco();
+  }, []);
+
   return (
     <ScrollView>
     <SafeAreaView style={styles.container}> 
     <View>
-      <Text>Entre com o CEP para pesquisar: 00000-000</Text>
+      <Text style = {styles.texto}>Entre com o CEP para pesquisar: 00000-000</Text>
       <TextInput 
-        style = {styles.texto}
+        style = {styles.input}
         onChangeText={alterarCep}
         value = { cep }
         keyboardType = "numeric"
@@ -33,14 +60,22 @@ export default function App(){
         onFocus={()=>alterarCep("")}
         />
       
-      <Button 
-        style = {styles.botao}
-        title="Consumindo ViaCEP API"
-        color="#841584"
-        accessibilityLabel="Aprenda mais
-        sobre consumo de API REST"
-      />
-
+      {isLoading ? <ActivityIndicator /> : 
+        <Button 
+          onPress={
+            () => {
+              setLoading(true);
+              buscarEndereco();
+            }
+          }
+          style = {styles.botao}
+          title="Consumindo ViaCEP API"
+          color="#841584"
+          accessibilityLabel="Aprenda mais
+          sobre consumo de API REST"
+        />
+      }
+      
       <TextInput
         style = {styles.inputLarge}
         onChangeText={alterarLogradouro}
