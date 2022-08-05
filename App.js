@@ -26,6 +26,7 @@ export default function App(){
     <View>
       <Text>Entre com o CEP para pesquisar: 00000-000</Text>
       <TextInput 
+        style = {styles.texto}
         onChangeText={alterarCep}
         value = { cep }
         keyboardType = "numeric"
@@ -106,10 +107,18 @@ export default function App(){
 
 const styles = StyleSheet.create({
   container: {
+    display: 'flex',
     flex: 1,
     backgroundColor: '#fff',
-    margin: 16,
+    margin: 32,
     marginTop: 48,
+    justifyContent: "center",
+    alignItems:"center"
   },
+  texto: {
+    alignSelf: 'center', 
+    textAlign: 'center',
+  }, 
+  
 
 })
